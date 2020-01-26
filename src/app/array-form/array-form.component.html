@@ -1,0 +1,27 @@
+<div class="arrayFormContainer">
+  <form [formGroup]="myReactiveForm">
+    Value: {{myReactiveForm.value | json}}
+    <hr>
+    <br />
+    <br />
+    <mat-form-field>
+      <input matInput placeholder="Enter your email" formControlName="email">
+    </mat-form-field>
+
+    <div formArrayName="phones">
+      <div *ngFor="let phone of phonesForm.controls; let i=index;" [formGroupName]="i">
+        <mat-form-field class="sm">
+          <input matInput placeholder="prefix" formControlName="prefixCode">
+        </mat-form-field>
+        <mat-form-field class="xs">
+          <input matInput placeholder="line" formControlName="lineNumber">
+        </mat-form-field>
+        <button mat-raised-button color="warn" (click)="deletePhone(i)">Delete Phone</button>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" (click)="addPhone()">Add a Phone</button>
+  </form>
+</div>
+
+<br />
+<button mat-raised-button color="primary" routerLink="/validReactiveForm">Go to validation-enabled Reactive Form</button>
